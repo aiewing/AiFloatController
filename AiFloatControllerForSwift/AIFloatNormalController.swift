@@ -27,7 +27,7 @@ class AIFloatNormalController: AiFloatController {
     }
     
     func loadUI() {
-        initFloatController(.BecomeLarge, headerView: headerView, pullLargeView: nil, floatView: floatView, scrollViews: [tableView], overlyingHeight: 0)
+        initFloatController(.BecomeLarge, headerView: headerView, pullLargeView: nil, floatView: floatView, scrollViews: [tableView], overlyingHeight: 20)
         
         navBarView.bgImgView.addSubview(navBarImgView)
         navBarView.bgImgView.backgroundColor = .clear
@@ -65,6 +65,7 @@ class AIFloatNormalController: AiFloatController {
         let view = UIView()
         view.frame = CGRect(x: 0, y: 0, width: AiScreenWidth, height: 50)
         view.backgroundColor = .green
+        view.addRoundedCorners([.topLeft, .topRight], radius: CGSize(width: 20, height: 20))
         return view
     }()
 

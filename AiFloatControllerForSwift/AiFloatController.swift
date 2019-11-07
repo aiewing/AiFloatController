@@ -38,6 +38,13 @@ class AiFloatController: UIViewController {
         view.addSubview(navBarView)
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        // 开始定时器
+//        self.displayLink.isPaused = false
+    }
+    
     fileprivate func loadLayout() {
         mainScrollView.frame = CGRect(x: 0, y: 0, width: AiScreenWidth, height: AiScreenHeight - AiStatusBarSafeInsetHeight)
         navBarView.frame = CGRect(x: 0, y: 0, width: AiScreenWidth, height: AiNavigationBarHeight)
@@ -50,6 +57,7 @@ class AiFloatController: UIViewController {
         self.floatView = floatView
         self.scrollViews = scrollViews
         self.overlyingHeight = overlyingHeight
+        self.scrollOffsetYs = [CGFloat](repeating: 0, count: scrollViews.count)
         
         headerViewHeight = headerView.frame.size.height
         if let aPullLargeView = pullLargeView {
@@ -83,6 +91,90 @@ class AiFloatController: UIViewController {
         
     }
     
+    @objc func checkScrollView() {
+        guard let scrollViews = self.scrollViews, let scrollOffsetYs = self.scrollOffsetYs else {
+            return
+        }
+        for index in 0..<scrollViews.count {
+            let scrollView: UIScrollView = scrollViews[index]
+            let offset: CGFloat = scrollOffsetYs[index]
+            if scrollView.contentOffset.y != offset {
+                // 正在移动
+                aiScrollViewDidScroll(scrollView)
+                break
+            }
+        }
+    }
+    
+    func aiScrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentOffsetY = scrollView.contentOffset.y
+        
+        // 上下滑动
+        if contentOffsetY >= -headerAllHeight {
+            var y = -headerAllHeight - contentOffsetY
+            if y > 0 {
+                y = 0
+            }
+            
+            if y < -headerAllHeight {
+                y = -headerAllHeight
+            }
+            
+            if contentOffsetY >= -(floatViewHeight + AiNavigationBarHeight) {
+                // 开始悬浮
+                floatView?.frame = CGRect(x: 0, y: AiNavigationBarHeight, width: AiScreenWidth, height: floatViewHeight)
+                headerView?.frame = CGRect(x: 0, y: -headerViewHeight + overlyingHeight + AiNavigationBarHeight, width: AiScreenWidth, height: headerViewHeight)
+            } else {
+                headerView?.frame = CGRect(x: 0, y: y, width: AiScreenWidth, height: headerViewHeight)
+                floatView?.frame = CGRect(x: 0, y: y + headerViewHeight - overlyingHeight, width: AiScreenWidth, height: floatViewHeight)
+            }
+            
+            if pullType == .BecomeLarge &&
+                pullLargeView != headerView {
+                if let headerView = self.headerView {
+                    pullLargeView?.frame = headerView.bounds
+                }
+            }
+        } else {
+            if pullType == .Immobility {
+                headerView?.frame = CGRect(x: 0, y: 0, width: AiScreenWidth, height: headerViewHeight)
+                if let headerView = self.headerView {
+                    floatView?.frame = CGRect(x: 0, y: headerView.frame.maxY - overlyingHeight, width: AiScreenWidth, height: floatViewHeight)
+                }
+            } else if pullType == .BecomeLarge {
+                // 头部拉升会变大
+                if self.pullLargeView != nil {
+                    let pullHeight = -headerAllHeight - contentOffsetY
+                    let headerHeight = pullLargerViewHeight + pullHeight
+                    let headerWidth = (AiScreenWidth / pullLargerViewHeight) * headerHeight
+                    let headerX = (headerWidth - AiScreenWidth) * 0.5
+                    
+                    headerView?.frame = CGRect(x: 0, y: 0, width: AiScreenWidth, height: headerViewHeight + pullHeight)
+                    pullLargeView?.frame = CGRect(x: -headerX, y: 0, width: headerWidth, height: headerHeight)
+                    if let headerView = self.headerView {
+                        floatView?.frame = CGRect(x: 0, y: headerView.frame.maxY - overlyingHeight, width: AiScreenWidth, height: floatViewHeight)
+                    }
+                } else {
+                    let pullHeight = -headerAllHeight - contentOffsetY
+                    let headerHeight = headerViewHeight + pullHeight
+                    let headerWidth = (AiScreenWidth / headerViewHeight) * headerHeight
+                    let headerX = (headerWidth - AiScreenWidth) * 0.5
+                    
+                    headerView?.frame = CGRect(x: -headerX, y: 0, width: headerWidth, height: headerHeight)
+                    if let headerView = self.headerView {
+                        floatView?.frame = CGRect(x: 0, y: headerView.frame.maxY - overlyingHeight, width: AiScreenWidth, height: floatViewHeight)
+                    }
+                }
+            }
+        }
+        
+        // 回调
+        scrollViewDidScroll(contentOffsetY)
+        
+        // 联动
+        scrollViewsToScrollTogetherWithCurrentScrollView(scrollView)
+    }
+    
     fileprivate func scrollViewsToScrollTogetherWithCurrentScrollView(_ scrollView: UIScrollView) {
         guard let scrollViews = self.scrollViews else {
             return
@@ -110,6 +202,13 @@ class AiFloatController: UIViewController {
         view.showsHorizontalScrollIndicator = false
         return view
     }()
+    
+    fileprivate lazy var displayLink: CADisplayLink = {
+        let dis = CADisplayLink(target: self, selector: #selector(checkScrollView))
+        dis.isPaused = true
+        dis.add(to: RunLoop.current, forMode: .common)
+        return dis
+    }()
 
     // 自定义导航栏
     lazy var navBarView : AiNavBarView = {
@@ -126,6 +225,7 @@ class AiFloatController: UIViewController {
     fileprivate var pullLargeView: UIView?
     fileprivate var floatView: UIView?
     fileprivate var scrollViews: Array<UIScrollView>?
+    fileprivate var scrollOffsetYs: Array<CGFloat>?
     fileprivate var overlyingHeight: CGFloat = 0.0
     fileprivate var headerViewHeight: CGFloat = 0.0
     fileprivate var pullLargerViewHeight: CGFloat = 0.0
@@ -139,71 +239,7 @@ extension AiFloatController: UIScrollViewDelegate {
             // 左右滑动
             
         } else {
-            let contentOffsetY = scrollView.contentOffset.y
-            // 回调
-            scrollViewDidScroll(contentOffsetY)
-            
-            // 上下滑动
-            if contentOffsetY >= -headerAllHeight {
-                var y = -headerAllHeight - contentOffsetY
-                if y > 0 {
-                    y = 0
-                }
-                
-                if y < -headerAllHeight {
-                    y = -headerAllHeight
-                }
-                
-                if contentOffsetY >= -(floatViewHeight + AiNavigationBarHeight) {
-                    // 开始悬浮
-                    floatView?.frame = CGRect(x: 0, y: AiNavigationBarHeight, width: AiScreenWidth, height: floatViewHeight)
-                    headerView?.frame = CGRect(x: 0, y: -headerViewHeight + overlyingHeight + AiNavigationBarHeight, width: AiScreenWidth, height: headerViewHeight)
-                } else {
-                    headerView?.frame = CGRect(x: 0, y: y, width: AiScreenWidth, height: headerViewHeight)
-                    floatView?.frame = CGRect(x: 0, y: y + headerViewHeight - overlyingHeight, width: AiScreenWidth, height: floatViewHeight)
-                }
-                
-                if pullType == .BecomeLarge &&
-                    pullLargeView != headerView {
-                    if let headerView = self.headerView {
-                        pullLargeView?.frame = headerView.bounds
-                    }
-                }
-            } else {
-                if pullType == .Immobility {
-                    headerView?.frame = CGRect(x: 0, y: 0, width: AiScreenWidth, height: headerViewHeight)
-                    if let headerView = self.headerView {
-                        floatView?.frame = CGRect(x: 0, y: headerView.frame.maxY - overlyingHeight, width: AiScreenWidth, height: floatViewHeight)
-                    }
-                } else if pullType == .BecomeLarge {
-                    // 头部拉升会变大
-                    if self.pullLargeView != nil {
-                        let pullHeight = -headerAllHeight - contentOffsetY
-                        let headerHeight = pullLargerViewHeight + pullHeight
-                        let headerWidth = (AiScreenWidth / pullLargerViewHeight) * headerHeight
-                        let headerX = (headerWidth - AiScreenWidth) * 0.5
-                        
-                        headerView?.frame = CGRect(x: 0, y: 0, width: AiScreenWidth, height: headerViewHeight + pullHeight)
-                        pullLargeView?.frame = CGRect(x: -headerX, y: 0, width: headerWidth, height: headerHeight)
-                        if let headerView = self.headerView {
-                            floatView?.frame = CGRect(x: 0, y: headerView.frame.maxY - overlyingHeight, width: AiScreenWidth, height: floatViewHeight)
-                        }
-                    } else {
-                        let pullHeight = -headerAllHeight - contentOffsetY
-                        let headerHeight = headerViewHeight + pullHeight
-                        let headerWidth = (AiScreenWidth / headerViewHeight) * headerHeight
-                        let headerX = (headerWidth - AiScreenWidth) * 0.5
-                        
-                        headerView?.frame = CGRect(x: -headerX, y: 0, width: headerWidth, height: headerHeight)
-                        if let headerView = self.headerView {
-                            floatView?.frame = CGRect(x: 0, y: headerView.frame.maxY - overlyingHeight, width: AiScreenWidth, height: floatViewHeight)
-                        }
-                    }
-                }
-            }
-            
-            // 联动
-            scrollViewsToScrollTogetherWithCurrentScrollView(scrollView)
+            aiScrollViewDidScroll(scrollView)
         }
     }
 }

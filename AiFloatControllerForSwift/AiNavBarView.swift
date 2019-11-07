@@ -14,6 +14,7 @@ class AiNavBarView: UIView {
 
     lazy var bgImgView : UIImageView = {
         let view = UIImageView()
+        view.clipsToBounds = true
         view.backgroundColor = .white
         return view
     }()

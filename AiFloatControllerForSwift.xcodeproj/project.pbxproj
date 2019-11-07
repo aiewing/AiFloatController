@@ -22,6 +22,7 @@
 		016D13FC2370435E006B5737 /* ai_navback@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 016D13FA2370435E006B5737 /* ai_navback@3x.png */; };
 		016D13FE237117C2006B5737 /* 小埋.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 016D13FD237117C2006B5737 /* 小埋.jpeg */; };
 		01D7FBD4237183B30001760D /* UIImageEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D7FBD3237183B20001760D /* UIImageEffects.swift */; };
+		01D7FBD82373C9760001760D /* UIViewCornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D7FBD72373C9760001760D /* UIViewCornerRadius.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		016D13FA2370435E006B5737 /* ai_navback@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ai_navback@3x.png"; sourceTree = "<group>"; };
 		016D13FD237117C2006B5737 /* 小埋.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "小埋.jpeg"; sourceTree = "<group>"; };
 		01D7FBD3237183B20001760D /* UIImageEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageEffects.swift; sourceTree = "<group>"; };
+		01D7FBD72373C9760001760D /* UIViewCornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewCornerRadius.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				016D13D5237016BE006B5737 /* AIFloatNormalController.swift */,
 				016D13F723703FF3006B5737 /* AiNavBarView.swift */,
 				01D7FBD3237183B20001760D /* UIImageEffects.swift */,
+				01D7FBD72373C9760001760D /* UIViewCornerRadius.swift */,
 				016D13F92370435E006B5737 /* ai_navback@2x.png */,
 				016D13FA2370435E006B5737 /* ai_navback@3x.png */,
 				016D13FD237117C2006B5737 /* 小埋.jpeg */,
@@ -169,6 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				016D13D2237008EB006B5737 /* Header.swift in Sources */,
+				01D7FBD82373C9760001760D /* UIViewCornerRadius.swift in Sources */,
 				0112E2612366E358007CE17F /* ViewController.swift in Sources */,
 				01D7FBD4237183B30001760D /* UIImageEffects.swift in Sources */,
 				0112E2712366E48E007CE17F /* AiTableView.swift in Sources */,
@@ -321,6 +325,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SBBB6927FD;
 				INFOPLIST_FILE = AiFloatControllerForSwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -338,6 +343,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SBBB6927FD;
 				INFOPLIST_FILE = AiFloatControllerForSwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
