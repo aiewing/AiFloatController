@@ -1,15 +1,15 @@
 //
-//  AIFloatNormalController.swift
+//  AiFloatNormal2Controller.swift
 //  AiFloatControllerForSwift
 //
-//  Created by Aiewing on 2019/11/4.
-//  Copyright © 2019 Aiewing. All rights reserved.
+//  Created by Aiewing on 2020/5/26.
+//  Copyright © 2020 Aiewing. All rights reserved.
 //
 
 import UIKit
 
-class AiFloatNormalController: AiFloatController {
-    
+class AiFloatNormal2Controller: AiFloatController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,7 +27,7 @@ class AiFloatNormalController: AiFloatController {
     }
     
     func loadUI() {
-        initFloatController(pullType: .BecomeLarge, headerView: headerView, pullLargeView: nil, floatView: floatView, overlyingHeight: 20, scrollViews: [tableView], bottomViews: [nil])
+        initFloatController(pullType: .Immobility, headerView: headerView, pullLargeView: nil, floatView: floatView, overlyingHeight: 20, scrollViews: [tableView], bottomViews: [nil])
         
         navBarView.bgImgView.addSubview(navBarImgView)
         navBarView.bgImgView.backgroundColor = .clear
@@ -81,4 +81,5 @@ class AiFloatNormalController: AiFloatController {
         }
         return arr
     }()
+
 }

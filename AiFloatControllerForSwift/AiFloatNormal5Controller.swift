@@ -1,14 +1,14 @@
 //
-//  AIFloatNormalController.swift
+//  AiFloatNormal5Controller.swift
 //  AiFloatControllerForSwift
 //
-//  Created by Aiewing on 2019/11/4.
-//  Copyright © 2019 Aiewing. All rights reserved.
+//  Created by Aiewing on 2020/5/26.
+//  Copyright © 2020 Aiewing. All rights reserved.
 //
 
 import UIKit
 
-class AiFloatNormalController: AiFloatController {
+class AiFloatNormal5Controller: AiFloatController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,26 +19,32 @@ class AiFloatNormalController: AiFloatController {
     }
     
     override func scrollViewDidScroll(_ offsetY: CGFloat) {
-        navBarImgView.frame = headerView.frame
-        // 如果到顶了就不需要变化了
-        if headerView.frame.maxY <= AiNavigationBarHeight {
+        if headerView.frame.minY < 0 {
+            navBarImgView.frame = headerView.frame
+        } else if (headerView.frame.maxY <= AiNavigationBarHeight) {
             navBarImgView.frame = CGRect(x: 0, y: -headerView.frame.size.height + AiNavigationBarHeight, width: AiScreenWidth, height: headerView.frame.size.height)
+        } else {
+            navBarImgView.frame = headerImageView.frame
         }
     }
     
     func loadUI() {
-        initFloatController(pullType: .BecomeLarge, headerView: headerView, pullLargeView: nil, floatView: floatView, overlyingHeight: 20, scrollViews: [tableView], bottomViews: [nil])
+        initFloatController(pullType: .BecomeLarge, headerView: headerView, pullLargeView: headerImageView, floatView: floatView, overlyingHeight: 20, scrollViews: [tableView], bottomViews: [nil])
         
         navBarView.bgImgView.addSubview(navBarImgView)
         navBarView.bgImgView.backgroundColor = .clear
+        
+        headerView.addSubview(headerImageView)
+        headerView.addSubview(redView)
+        headerView.addSubview(greenView)
     }
     
     func loadData() {
         tableView.titleArr = titleArr
         let image = UIImage(named: "小埋.jpeg")
         if let aImage = image {
-            headerView.image = aImage.applyLightEffect()
-            navBarImgView.image = headerView.image
+            headerImageView.image = aImage.applyLightEffect()
+            navBarImgView.image = headerImageView.image
         }
     }
     
@@ -46,11 +52,31 @@ class AiFloatNormalController: AiFloatController {
         navBarImgView.frame = headerView.bounds
     }
     
-    lazy var headerView: UIImageView = {
+    lazy var headerView: UIView = {
+        let view: UIView = UIView()
+        view.frame = CGRect(x: 0, y: 0, width: AiScreenWidth, height: 200 + 20)
+        return view
+    }()
+    
+    lazy var headerImageView: UIImageView = {
         let view: UIImageView = UIImageView()
         view.frame = CGRect(x: 0, y: 0, width: AiScreenWidth, height: 200 + 20)
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
+        return view
+    }()
+    
+    lazy var redView: UIView = {
+        let view: UIView = UIView()
+        view.frame = CGRect(x: 100, y: 100, width: 50, height: 50)
+        view.backgroundColor = .red
+        return view
+    }()
+    
+    lazy var greenView: UIView = {
+        let view: UIView = UIView()
+        view.frame = CGRect(x: 200, y: 100, width: 50, height: 50)
+        view.backgroundColor = .green
         return view
     }()
     

@@ -14,9 +14,13 @@
 		0112E2662366E359007CE17F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0112E2652366E359007CE17F /* Assets.xcassets */; };
 		0112E2692366E359007CE17F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0112E2672366E359007CE17F /* LaunchScreen.storyboard */; };
 		0112E2712366E48E007CE17F /* AiTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0112E2702366E48E007CE17F /* AiTableView.swift */; };
+		01429DE5247CBA82005BD9E4 /* AiFloatNormal2Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01429DE4247CBA81005BD9E4 /* AiFloatNormal2Controller.swift */; };
+		01429DE7247CE589005BD9E4 /* AiFloatNormal3Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01429DE6247CE589005BD9E4 /* AiFloatNormal3Controller.swift */; };
+		01429DE9247CE7DC005BD9E4 /* AiFloatNormal4Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01429DE8247CE7DC005BD9E4 /* AiFloatNormal4Controller.swift */; };
+		01429DEB247CF46A005BD9E4 /* AiFloatNormal5Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01429DEA247CF46A005BD9E4 /* AiFloatNormal5Controller.swift */; };
 		016D13D2237008EB006B5737 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016D13D1237008EB006B5737 /* Header.swift */; };
 		016D13D4237016A7006B5737 /* AiFloatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016D13D3237016A7006B5737 /* AiFloatController.swift */; };
-		016D13D6237016BE006B5737 /* AIFloatNormalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016D13D5237016BE006B5737 /* AIFloatNormalController.swift */; };
+		016D13D6237016BE006B5737 /* AiFloatNormalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016D13D5237016BE006B5737 /* AiFloatNormalController.swift */; };
 		016D13F823703FF3006B5737 /* AiNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016D13F723703FF3006B5737 /* AiNavBarView.swift */; };
 		016D13FB2370435E006B5737 /* ai_navback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 016D13F92370435E006B5737 /* ai_navback@2x.png */; };
 		016D13FC2370435E006B5737 /* ai_navback@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 016D13FA2370435E006B5737 /* ai_navback@3x.png */; };
@@ -35,9 +39,13 @@
 		0112E2682366E359007CE17F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0112E26A2366E359007CE17F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0112E2702366E48E007CE17F /* AiTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AiTableView.swift; sourceTree = "<group>"; };
+		01429DE4247CBA81005BD9E4 /* AiFloatNormal2Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AiFloatNormal2Controller.swift; sourceTree = "<group>"; };
+		01429DE6247CE589005BD9E4 /* AiFloatNormal3Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AiFloatNormal3Controller.swift; sourceTree = "<group>"; };
+		01429DE8247CE7DC005BD9E4 /* AiFloatNormal4Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AiFloatNormal4Controller.swift; sourceTree = "<group>"; };
+		01429DEA247CF46A005BD9E4 /* AiFloatNormal5Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AiFloatNormal5Controller.swift; sourceTree = "<group>"; };
 		016D13D1237008EB006B5737 /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
 		016D13D3237016A7006B5737 /* AiFloatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AiFloatController.swift; sourceTree = "<group>"; };
-		016D13D5237016BE006B5737 /* AIFloatNormalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIFloatNormalController.swift; sourceTree = "<group>"; };
+		016D13D5237016BE006B5737 /* AiFloatNormalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AiFloatNormalController.swift; sourceTree = "<group>"; };
 		016D13F723703FF3006B5737 /* AiNavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AiNavBarView.swift; sourceTree = "<group>"; };
 		016D13F92370435E006B5737 /* ai_navback@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ai_navback@2x.png"; sourceTree = "<group>"; };
 		016D13FA2370435E006B5737 /* ai_navback@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ai_navback@3x.png"; sourceTree = "<group>"; };
@@ -82,7 +90,11 @@
 				0112E2702366E48E007CE17F /* AiTableView.swift */,
 				016D13D1237008EB006B5737 /* Header.swift */,
 				016D13D3237016A7006B5737 /* AiFloatController.swift */,
-				016D13D5237016BE006B5737 /* AIFloatNormalController.swift */,
+				016D13D5237016BE006B5737 /* AiFloatNormalController.swift */,
+				01429DE4247CBA81005BD9E4 /* AiFloatNormal2Controller.swift */,
+				01429DE6247CE589005BD9E4 /* AiFloatNormal3Controller.swift */,
+				01429DE8247CE7DC005BD9E4 /* AiFloatNormal4Controller.swift */,
+				01429DEA247CF46A005BD9E4 /* AiFloatNormal5Controller.swift */,
 				016D13F723703FF3006B5737 /* AiNavBarView.swift */,
 				01D7FBD3237183B20001760D /* UIImageEffects.swift */,
 				01D7FBD72373C9760001760D /* UIViewCornerRadius.swift */,
@@ -171,16 +183,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01429DE9247CE7DC005BD9E4 /* AiFloatNormal4Controller.swift in Sources */,
+				01429DEB247CF46A005BD9E4 /* AiFloatNormal5Controller.swift in Sources */,
 				016D13D2237008EB006B5737 /* Header.swift in Sources */,
+				01429DE7247CE589005BD9E4 /* AiFloatNormal3Controller.swift in Sources */,
 				01D7FBD82373C9760001760D /* UIViewCornerRadius.swift in Sources */,
 				0112E2612366E358007CE17F /* ViewController.swift in Sources */,
 				01D7FBD4237183B30001760D /* UIImageEffects.swift in Sources */,
 				0112E2712366E48E007CE17F /* AiTableView.swift in Sources */,
 				0112E25D2366E358007CE17F /* AppDelegate.swift in Sources */,
 				016D13F823703FF3006B5737 /* AiNavBarView.swift in Sources */,
-				016D13D6237016BE006B5737 /* AIFloatNormalController.swift in Sources */,
+				016D13D6237016BE006B5737 /* AiFloatNormalController.swift in Sources */,
 				016D13D4237016A7006B5737 /* AiFloatController.swift in Sources */,
 				0112E25F2366E358007CE17F /* SceneDelegate.swift in Sources */,
+				01429DE5247CBA82005BD9E4 /* AiFloatNormal2Controller.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
